@@ -1,4 +1,4 @@
-package com.example.aluravery.ui.theme
+package com.example.aluvery.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -14,12 +14,6 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-import com.example.aluvery.ui.theme.Pink40
-import com.example.aluvery.ui.theme.Pink80
-import com.example.aluvery.ui.theme.Purple40
-import com.example.aluvery.ui.theme.Purple80
-import com.example.aluvery.ui.theme.PurpleGrey40
-import com.example.aluvery.ui.theme.PurpleGrey80
 
 private val DarkColorScheme = darkColorScheme(
     primary = Purple80,
@@ -44,7 +38,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun AluraveryTheme(
+fun AluveryTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,

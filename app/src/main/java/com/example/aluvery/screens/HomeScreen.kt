@@ -1,4 +1,4 @@
-package com.example.aluravery.screens
+package com.example.aluvery.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
