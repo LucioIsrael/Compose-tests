@@ -1,6 +1,5 @@
-package com.example.aluvery.components
+package com.example.aluvery.ui.components
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,6 +15,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,23 +24,29 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.aluvery.R
-import com.example.aluvery.dimensions.Dimensions
-import com.example.aluvery.extensions.toBrazilianCurrency
+import com.example.aluvery.core.dimensions.Dimensions
+import com.example.aluvery.core.extensions.toBrazilianCurrency
 import com.example.aluvery.model.Product
-import com.example.aluvery.ui.theme.Purple500
-import com.example.aluvery.ui.theme.Teal200
+import com.example.aluvery.ui.theme.AluveryTheme
 import java.math.BigDecimal
 
 @Composable
-fun ProductItem(product: Product) {
+fun ProductItem(
+    product: Product,
+    modifier: Modifier = Modifier
+) {
     Surface(
+        modifier,
         shape = RoundedCornerShape(15.dp),
         shadowElevation = 4.dp
     ) {
@@ -55,11 +61,21 @@ fun ProductItem(product: Product) {
                     .height(Dimensions.ProductImageSize)
                     .fillMaxWidth()
                     .background(
-                        brush = Brush.horizontalGradient(listOf(Purple500, Teal200))
+                        brush = Brush.horizontalGradient(
+                            listOf(
+                                MaterialTheme.colorScheme.primary,
+                                MaterialTheme.colorScheme.secondary
+                            )
+                        )
                     )
             ) {
-                Image(
-                    painter = painterResource(id = product.image),
+                AsyncImage(
+                    model = ImageRequest
+                        .Builder(LocalContext.current)
+                        .data(product.image)
+                        .crossfade(true)
+                        .build(),
+                    placeholder = painterResource(id = R.drawable.placeholder),
                     contentDescription = null,
                     modifier = Modifier
                         .size(Dimensions.ProductImageSize)
@@ -93,11 +109,14 @@ fun ProductItem(product: Product) {
 @Preview(showBackground = true)
 @Composable
 private fun ProductItemPreview() {
-    ProductItem(
-        Product(
-            name = "TESTE",
-            price = BigDecimal("14.99"),
-            image = R.drawable.placeholder
-        )
-    )
+    AluveryTheme {
+        Surface {
+            ProductItem(
+                Product(
+                    name = "TESTE",
+                    price = BigDecimal("14.99")
+                )
+            )
+        }
+    }
 }

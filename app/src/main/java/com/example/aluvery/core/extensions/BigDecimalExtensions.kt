@@ -1,4 +1,4 @@
-package com.example.aluvery.extensions
+package com.example.aluvery.core.extensions
 
 import android.icu.text.NumberFormat
 import java.math.BigDecimal

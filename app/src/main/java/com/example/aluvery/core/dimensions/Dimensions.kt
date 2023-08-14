@@ -1,4 +1,4 @@
-package com.example.aluvery.dimensions
+package com.example.aluvery.core.dimensions
 
 import androidx.compose.ui.unit.dp
 
